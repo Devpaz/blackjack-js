@@ -10,6 +10,7 @@ const especiales =['A','J','Q','K'];
 let puntosJugador = 0,
     puntosComputadora = 0;
 //referencias del HTML
+const btnNuevo = document.querySelector('#btnNuevo');
 const btnPedir = document.querySelector('#btnPedir');
 const btnDetener = document.querySelector('#btnDetener');
 const divCartasJugador= document.querySelector('#jugador-cartas');
@@ -78,6 +79,20 @@ const turnoComputadora = (puntosMinimos) => {
             break;
         }
     } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
+
+    setTimeout(() => {
+        if ( puntosComputadora === puntosMinimos ){
+            alert('Nadie gana :(');
+        }else if ( puntosMinimos > 21 ) {
+            alert('Computadora gana ');
+        }else if ( puntosComputadora > 21 ){
+            alert('Jugador gana');
+        }else {
+            alert('Computadora Gana');
+        }
+    },20);
+    
+
 }
 
 // Eventos
@@ -111,4 +126,20 @@ btnDetener.addEventListener('click', () =>{
     btnPedir.disabled = true;
     btnDetener.disabled = true;
     turnoComputadora( puntosJugador );
+});
+
+btnNuevo.addEventListener('click', () =>{
+    console.clear();
+    deck = [];
+    deck = crearDeck();
+    btnPedir.disabled = false;
+    btnDetener.disabled = false;
+    puntosComputadora =0;
+    puntosJugador=0;
+    puntosHTML[0].innerText=puntosJugador; 
+    puntosHTML[1].innerText=puntosComputadora;
+    
+    divCartasJugador.innerHTML = '';
+    divCartasComputadora.innerHTML = '';
+    
 });
